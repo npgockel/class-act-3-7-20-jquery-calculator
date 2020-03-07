@@ -138,26 +138,77 @@
 
     <script type="text/javascript">
       $(document).ready(function() {
+        var firstNumber = "";
+        var secondNumber = "";
+        var operator = "";
+        var result;
         // Your code here...
-        var number1 = [];
-        var number2 = [];
-        var operator;
-        var equals;
-
-        // Number Buttons
-        $();
-
-        // Convert numberArray to String
-        function joinNumber1() {
-          number1.join("");
+        $(".number").on("click", function() {
+          if (operator === "") {
+            firstNumber = firstNumber + $(this).val();
+          } else {
+            secondNumber = secondNumber + $(this).val();
+          }
+          render();
+        });
+        $(".operator").on("click", function() {
+          operator = $(this).val();
+          render();
+        });
+        function render() {
+          $("#first-number").text(firstNumber);
+          $("#second-number").text(secondNumber);
+          $("#result").text(result);
+          if (operator === "times") {
+            $("#operator").text("x");
+          } else if (operator === "plus") {
+            $("#operator").text("+");
+          } else if (operator === "minus") {
+            $("#operator").text("-");
+          } else if (operator === "divide") {
+            $("#operator").text("/");
+          } else if (operator === "power") {
+            $("#operator").text("^");
+          }
+          else {
+            $("#operator").text("");
+          }
         }
-        function joinNumber2() {
-          number2.join("");
-        }
 
-        // Operater Button
-
-        // Equal Button
+          $("#button-equal").on("click", function() {
+            firstNumber = parseInt(firstNumber);
+            secondNumber = parseInt(secondNumber);
+            console.log(firstNumber)
+            console.log(secondNumber)
+            if (operator === "times") {
+              result = firstNumber * secondNumber;
+              console.log(result);
+              $("#result").text(result)
+            } else if (operator === "plus") {
+              result = firstNumber + secondNumber;
+              $("#result").text(result)
+              console.log(result);
+            } else if (operator === "minus") {
+              result = firstNumber - secondNumber;
+              $("#result").text(result)
+              console.log(result);
+            } else if (operator === "divide") {
+              result = firstNumber / secondNumber;
+              $("#result").text(result)
+              console.log(result);
+            } else if (operator === "power") {
+              result = firstNumber ** secondNumber;
+              $("#result").text(result)
+              console.log(result);
+            }
+          });
+          $(".clear").on("click", function(){
+            result = "";
+            firstNumber = "";
+            secondNumber = "";
+            operator = "";
+            render();
+          })
       });
     </script>
   </body>
